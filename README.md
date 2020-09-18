@@ -1,2 +1,2 @@
-# prism-style-transfer
+# Prism Style Transfer
 Style Transfer
