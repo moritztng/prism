@@ -85,7 +85,7 @@ class VGG19Loss(nn.Module):
         else:
             state_dict = torch.load(weights)
         vgg.load_state_dict(state_dict)
-        vgg = vgg.to(device).eval()
+        vgg = vgg.eval()
         for param in vgg.parameters():
             param.requires_grad_(False)
         i_pool, i_conv = 1, 0
@@ -116,3 +116,4 @@ class VGG19Loss(nn.Module):
             if (len(self.style_weights) == len(self.style_losses) and
                len(self.content_weights) == len(self.content_losses)):
                break
+        self.vgg_loss.to(device)
