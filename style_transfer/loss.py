@@ -4,6 +4,7 @@ from torch import nn
 from torchvision import models
 from torch.hub import load_state_dict_from_url
 from ast import literal_eval
+from itertools import chain
 from .utils import gram_matrix
 
 class ContentLoss(nn.Module):
@@ -68,6 +69,13 @@ class VGG19Loss(nn.Module):
             self._set_modes('none', 'target')
             self.vgg_loss(style)
         self._set_modes('loss', 'loss')
+
+    def reset(self):
+        for loss in chain(self.content_losses.values(),
+                          self.style_losses.values()):
+            if hasattr(loss, 'target'): delattr(loss, 'target')
+            if hasattr(loss, 'loss'): delattr(loss, 'loss')
+        self._set_modes('none', 'none')
 
     def _set_modes(self, content_mode, style_mode):
         for loss in self.content_losses.values():

@@ -42,6 +42,7 @@ class StyleTransfer(object):
             optimizer.step(closure)
         if self.logging:
             logger.close()
+        self.criterion.reset()
         return self.postprocess(artwork)
 
     def _init_artwork_criterion_optimizer(self, content, style, size,
