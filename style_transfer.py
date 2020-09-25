@@ -22,6 +22,7 @@ parser.add_argument('--no_feature_norm', action='store_false')
 parser.add_argument('--preserve_color', default='style')
 parser.add_argument('--weights', default='original')
 parser.add_argument('--device', default='auto')
+parser.add_argument('--quality', default=95, type=int)
 parser.add_argument('--logging', default=50, type=int)
 parser.add_argument('--seed', default='random')
 args = parser.parse_args()
@@ -48,7 +49,7 @@ with Image.open(args.content) as content, Image.open(args.style) as style:
                              init_random=args.init_random,
                              init_img=init_img,
                              iter=args.iter)
-artwork.save(args.artwork)
+artwork.save(args.artwork, quality=args.quality)
 artwork.close()
 if init_img:
     init_img.close()
