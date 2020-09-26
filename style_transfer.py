@@ -28,6 +28,8 @@ parser.add_argument('--seed', default='random')
 args = parser.parse_args()
 
 if args.seed != 'random':
+     torch.backends.cudnn.deterministic = True
+     torch.backends.cudnn.benchmark = False
      torch.manual_seed(int(args.seed))
 
 style_transfer = StyleTransfer(lr=args.lr,
