@@ -12,7 +12,7 @@ class StyleTransfer(object):
         if device == 'auto':
             device = 'cuda' if torch.cuda.is_available() else 'cpu'
         self.preprocess = Preprocess(preserve_color, device)
-        self.postprocess = Postprocess()
+        self.postprocess = Postprocess(device)
         self.criterion = VGG19Loss(content_weight, style_weight,
                                    content_weights, style_weights, avg_pool,
                                    feature_norm, weights, device)

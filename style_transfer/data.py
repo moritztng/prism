@@ -9,12 +9,12 @@ std = torch.Tensor([1, 1, 1])
 class Preprocess(object):
     def __init__(self, preserve_color, device):
         self.to_tensor = Compose([Resize(0),
-                                  ToTensor()])
-        self.normalize = Compose([Lambda(lambda x: x.flip(0)),
-                                  Normalize(mean, std),
-                                  Lambda(lambda x: x * 255),
-                                  Lambda(lambda x: x.unsqueeze(0)),
+                                  ToTensor(),
                                   Lambda(lambda x: x.to(device))])
+        self.normalize = Compose([Lambda(lambda x: x.flip(0)),
+                                  Normalize(mean.to(device), std.to(device)),
+                                  Lambda(lambda x: x * 255),
+                                  Lambda(lambda x: x.unsqueeze(0))])
         self.preserve_color = preserve_color
 
     def __call__(self, content, size, style=None):
@@ -31,12 +31,13 @@ class Preprocess(object):
         return (content_tensor, style_tensor) if style else content_tensor
 
 class Postprocess(object):
-    def __init__(self):
+    def __init__(self, device):
         self.transform = Compose([Lambda(lambda x: x / 255),
-                                  Normalize(-mean, std),
+                                  Normalize(-mean.to(device), std.to(device)),
                                   Lambda(lambda x: x.clamp(0,1)),
                                   Lambda(lambda x: x.flip(0)),
+                                  Lambda(lambda x: x.cpu()),
                                   ToPILImage()])
 
     def __call__(self, img):
-        return self.transform(img.squeeze().detach().cpu())
+        return self.transform(img.squeeze().detach())
