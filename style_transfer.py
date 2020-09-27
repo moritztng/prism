@@ -9,7 +9,7 @@ parser.add_argument('--style', default='images/style.jpg')
 parser.add_argument('--artwork', default='artwork.png')
 parser.add_argument('--init_img')
 parser.add_argument('--init_random', action='store_true')
-parser.add_argument('--size', default=400, type=int)
+parser.add_argument('--area', default=512, type=int)
 parser.add_argument('--iter', default=500, type=int)
 parser.add_argument('--lr', default=1, type=int)
 parser.add_argument('--content_weight', default=1, type=int)
@@ -47,7 +47,7 @@ style_transfer = StyleTransfer(lr=args.lr,
 init_img = Image.open(args.init_img) if args.init_img else None
 with Image.open(args.content) as content, Image.open(args.style) as style:
     artwork = style_transfer(content, style,
-                             size=args.size,
+                             area=args.area,
                              init_random=args.init_random,
                              init_img=init_img,
                              iter=args.iter)

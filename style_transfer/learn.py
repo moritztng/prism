@@ -19,11 +19,11 @@ class StyleTransfer(object):
         self.lr = lr
         self.logging = logging
 
-    def __call__(self, content, style, size=400, init_random=False,
+    def __call__(self, content, style, area=512, init_random=False,
                  init_img=None, iter=500):
         assert not (init_random and init_img)
         artwork, optimizer = self._init_artwork_criterion_optimizer(content,
-                             style, size, init_random, init_img)
+                             style, area, init_random, init_img)
         i = 0
         if self.logging:
             logger = Logger(i)
@@ -45,9 +45,9 @@ class StyleTransfer(object):
         self.criterion.reset()
         return self.postprocess(artwork)
 
-    def _init_artwork_criterion_optimizer(self, content, style, size,
+    def _init_artwork_criterion_optimizer(self, content, style, area,
                                           init_random, init_img):
-        content_tensor, style_tensor = self.preprocess(content, size, style)
+        content_tensor, style_tensor = self.preprocess(content, area, style)
         self.criterion.set_targets(content_tensor, style_tensor)
         if init_random:
             artwork = torch.randn_like(content_tensor)
