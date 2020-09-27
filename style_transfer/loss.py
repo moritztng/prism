@@ -61,13 +61,11 @@ class VGG19Loss(nn.Module):
         return (total_loss, content_loss, style_loss,
                 content_losses, style_losses)
 
-    def set_targets(self, content=None, style=None):
-        if content != None:
-            self._set_modes('target', 'none')
-            self.vgg_loss(content)
-        if style != None:
-            self._set_modes('none', 'target')
-            self.vgg_loss(style)
+    def set_targets(self, content, style):
+        self._set_modes('target', 'none')
+        self.vgg_loss(content)
+        self._set_modes('none', 'target')
+        self.vgg_loss(style)
         self._set_modes('loss', 'loss')
 
     def reset(self):
