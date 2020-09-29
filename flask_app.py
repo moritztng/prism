@@ -1,4 +1,4 @@
-from flask import Flask, request, send_file
+from flask import Flask, send_file, request
 from PIL import Image
 from io import BytesIO
 from time import time
@@ -25,28 +25,31 @@ def hello_world():
 
 @app.route('/style_transfer', methods=['POST'])
 def transfer():
-    with Image.open(f"images/styles/{request.form['style']}.jpg") as style, \
-         Image.open(request.files['content']) as content:
-        time_lowres, time_highres = time(), 0
+    form, files = request.form, request.files
+    iter_low, iter_high = int(form['iter_lowres']), int(form['iter_highres'])
+    with Image.open(f"images/styles/{form['style']}.jpg") as style, \
+         Image.open(files['content']) as content:
+        time_low, time_high = time(), 0
         artwork = style_transfer(content, style,
-                                area=int(request.form['area_lowres']),
-                                init_random=request.form['init_random']=='True',
-                                iter=int(request.form['iter_lowres']))
-        time_lowres = time() - time_lowres
-        if int(request.form['iter_highres']):
+                                area=int(form['area_lowres']),
+                                init_random=form['init_random']=='True',
+                                iter=iter_low)
+        time_low = time() - time_low
+        if iter_high:
             with artwork:
-                time_highres = time()
+                time_high = time()
                 artwork = style_transfer(content, style,
-                                         area=int(request.form['area_highres']),
+                                         area=int(form['area_highres']),
                                          init_img=artwork,
-                                         iter=int(request.form['iter_highres']))
-                time_highres = time() - time_highres
+                                         iter=iter_high)
+                time_high = time() - time_high
     artwork_bytes = BytesIO()
     with artwork:
         artwork.save(artwork_bytes, format='JPEG',
-                     quality=int(request.form['quality']))
+                     quality=int(form['quality']))
     artwork_bytes.seek(0)
-    print(f'{datetime.now().strftime("%d-%m-%Y %H:%M:%S"):*^50}\n'
-          f'Time Low Res: {time_lowres:.1f} | Time High Res: {time_highres:.1f}'
-          f'\nArgs: {request.form.to_dict()}')
+    print(f'{datetime.now().strftime("%d-%m-%Y %H:%M:%S"):*^50}\nLow Res Time '
+          f'Total: {time_low:.1f}, Iter: {time_low/iter_low:.3f} | High Res '
+          f'Time Total: {time_high:.1f}, Iter: {time_high/iter_high:.3f}\n'
+          f'Arguments: {form.to_dict()}')
     return send_file(artwork_bytes, 'image/jpeg')
