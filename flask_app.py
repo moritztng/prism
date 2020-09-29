@@ -50,6 +50,6 @@ def transfer():
     artwork_bytes.seek(0)
     print(f'{datetime.now().strftime("%d-%m-%Y %H:%M:%S"):*^50}\nLow Res Time '
           f'Total: {time_low:.1f}, Iter: {time_low/iter_low:.3f} | High Res '
-          f'Time Total: {time_high:.1f}, Iter: {time_high/iter_high:.3f}\n'
-          f'Arguments: {form.to_dict()}')
+          f'Time Total: {time_high:.1f}, Iter: {time_high/max(1,iter_high):.3f}'
+          f'\nArguments: {form.to_dict()}')
     return send_file(artwork_bytes, 'image/jpeg')
