@@ -4,8 +4,8 @@ from PIL import Image
 from style_transfer.learn import StyleTransfer
 
 parser = ArgumentParser(description="Prism Style Transfer")
-parser.add_argument('--content', default='images/content.jpg')
-parser.add_argument('--style', default='images/style.jpg')
+parser.add_argument('--content', default='images/contents/content.jpg')
+parser.add_argument('--style', default='images/styles/style.jpg')
 parser.add_argument('--artwork', default='artwork.png')
 parser.add_argument('--init_img')
 parser.add_argument('--init_random', action='store_true')
