@@ -15,7 +15,7 @@ args = parser.parse_args()
 
 data = vars(args)
 url = data.pop('url')
-data.pop('content')
-with open(args.content, 'rb') as content, open('artwork.jpg', 'wb') as artwork:
+content = data.pop('content')
+with open(content, 'rb') as content, open('artwork.jpg', 'wb') as artwork:
     r = requests.post(url, data=data, files={'content': content})
     artwork.write(r.content)
