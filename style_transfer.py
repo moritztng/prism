@@ -22,6 +22,7 @@ parser.add_argument('--no_feature_norm', action='store_false')
 parser.add_argument('--preserve_color', default='style')
 parser.add_argument('--weights', default='original')
 parser.add_argument('--device', default='auto')
+parser.add_argument('--use_amp', action='store_true')
 parser.add_argument('--quality', default=95, type=int)
 parser.add_argument('--logging', default=50, type=int)
 parser.add_argument('--seed', default='random')
@@ -42,6 +43,7 @@ style_transfer = StyleTransfer(lr=args.lr,
                                weights=args.weights,
                                preserve_color=args.preserve_color,
                                device=args.device,
+                               use_amp=args.use_amp, 
                                logging=args.logging)
 
 init_img = Image.open(args.init_img) if args.init_img else None

@@ -3,7 +3,8 @@ import torch
 def gram_matrix(input, feature_norm):
     b, c, h, w = input.size()
     feature_maps = input.view(b * c, h * w)
-    matrix = feature_maps @ feature_maps.t()
+    with torch.cuda.amp.autocast(enabled=False):
+        matrix = feature_maps.float() @ feature_maps.t().float()
     norm = b * c * h * w if feature_norm else h * w
     return matrix / norm
 
