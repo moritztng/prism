@@ -16,13 +16,13 @@ class GradScaler(object):
     def unscale(self, optimizer):
         if not self.enabled:
             return 
-        for param in optimizer._params:
+        for param in optimizer.param_groups[0]['params']:
             if param.grad.isnan().any() or param.grad.isinf().any():
                 optimizer.zero_grad()
                 self.scale_factor *= self.backoff_factor
                 self.unskipped_iter = 0
                 return
-        for param in optimizer._params:
+        for param in optimizer.param_groups[0]['params']:
             param.grad /= self.scale_factor
         self.unskipped_iter += 1
         if self.unskipped_iter >= self.growth_interval:
