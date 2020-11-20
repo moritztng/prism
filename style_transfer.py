@@ -24,6 +24,7 @@ parser.add_argument('--weights', default='original')
 parser.add_argument('--device', default='auto')
 parser.add_argument('--use_amp', action='store_true')
 parser.add_argument('--use_adam', action='store_true')
+parser.add_argument('--optim_cpu', action='store_true')
 parser.add_argument('--quality', default=95, type=int)
 parser.add_argument('--logging', default=50, type=int)
 parser.add_argument('--seed', default='random')
@@ -34,7 +35,8 @@ if args.seed != 'random':
      torch.backends.cudnn.benchmark = False
      torch.manual_seed(int(args.seed))
 
-style_transfer = StyleTransfer(content_weight=args.content_weight,
+style_transfer = StyleTransfer(lr=args.lr,
+                               content_weight=args.content_weight,
                                style_weight=args.style_weight,
                                content_weights=args.content_weights,
                                style_weights=args.style_weights,
@@ -43,7 +45,9 @@ style_transfer = StyleTransfer(content_weight=args.content_weight,
                                weights=args.weights,
                                preserve_color=args.preserve_color,
                                device=args.device,
-                               use_amp=args.use_amp, 
+                               use_amp=args.use_amp,
+                               adam=args.use_adam,
+                               optim_cpu=args.optim_cpu, 
                                logging=args.logging)
 
 init_img = Image.open(args.init_img) if args.init_img else None
@@ -52,9 +56,7 @@ with Image.open(args.content) as content, Image.open(args.style) as style:
                              area=args.area,
                              init_random=args.init_random,
                              init_img=init_img,
-                             iter=args.iter,
-                             lr=args.lr,
-                             adam=args.use_adam)
+                             iter=args.iter)
 artwork.save(args.artwork, quality=args.quality)
 artwork.close()
 if init_img:

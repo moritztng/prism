@@ -9,7 +9,7 @@ std = torch.Tensor([1, 1, 1])
 class Preprocess(object):
     def __init__(self, preserve_color, device):
         self.normalize = Compose([Lambda(lambda x: x.flip(0)),
-                                  Normalize(mean.to(device), std.to(device)),
+                                  Normalize(mean, std),
                                   Lambda(lambda x: x * 255),
                                   Lambda(lambda x: x.unsqueeze(0))])
         self.device = device
@@ -34,9 +34,9 @@ class Preprocess(object):
         return Compose([Resize(size), ToTensor()])(img).to(self.device)
 
 class Postprocess(object):
-    def __init__(self, device):
+    def __init__(self):
         self.transform = Compose([Lambda(lambda x: x / 255),
-                                  Normalize(-mean.to(device), std.to(device)),
+                                  Normalize(-mean, std),
                                   Lambda(lambda x: x.clamp(0,1)),
                                   Lambda(lambda x: x.flip(0)),
                                   Lambda(lambda x: x.cpu()),
