@@ -5,8 +5,8 @@ from .learn import StyleTransfer
 
 def main():
     parser = ArgumentParser(description="Prism Style Transfer")
-    parser.add_argument('--content')
-    parser.add_argument('--style')
+    parser.add_argument('content')
+    parser.add_argument('style')
     parser.add_argument('--artwork', default='artwork.png')
     parser.add_argument('--init_img')
     parser.add_argument('--init_random', action='store_true')
