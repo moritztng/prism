@@ -5,10 +5,11 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="prism-style-transfer",
-    version="0.0.1",
+    version="0.1",
     author="Moritz Thuening",
     author_email="hello@prism.art",
-    description="Simple Style Transfer",
+    description=("High Resolution Style Transfer in PyTorch "
+                 "with Colour Control and Mixed Precision"),
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/moritztng/prism",
@@ -24,5 +25,10 @@ setuptools.setup(
         'torchvision>=0.8.1',
         'tensorboard==2.3.0',
         'Pillow==7.2.0'
-    ]
+    ],
+    entry_points={
+        "console_scripts": [
+            "style-transfer = style_transfer.__main__:main"
+        ]
+    }
 )
