@@ -8,8 +8,8 @@ setuptools.setup(
     version="0.1",
     author="Moritz Thuening",
     author_email="hello@prism.art",
-    description=("High Resolution Style Transfer in PyTorch "
-                 "with Colour Control and Mixed Precision"),
+    description=("High Resolution Style Transfer in PyTorch"
+                 " with Color Control and Mixed Precision"),
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/moritztng/prism",
