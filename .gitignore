@@ -2,5 +2,3 @@
 runs/*
 *.jpg
 *.png
-!images/contents/content.jpg
-!images/styles/style.jpg
