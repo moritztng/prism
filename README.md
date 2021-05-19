@@ -4,6 +4,7 @@ pip install git+https://github.com/moritztng/prism.git
 ```
 
 ## Quickstart
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1zPlJUYNkmEllnUaZw20GFoYoDawIEtC5?usp=sharing)
 #### Minimal Example
 ```bash
 style-transfer content.jpg style.jpg
