@@ -5,7 +5,49 @@ from .loss import VGG19Loss
 from .amp import GradScaler
 
 class StyleTransfer(object):
-    """The central object that performs style transfer when called.""""
+    """The central object that performs style transfer when called.
+    
+    :param lr: Learning rate of the optimizer.
+    :type lr: float
+    :param content_weight: Weight for content loss.
+    :type content_weight: float
+    :param style_weight: Weight for style loss.
+    :type style_weight: float
+    :param content_weights: Weights of content loss for each layer.
+    :type content_weights: str
+    :param style_weights: Weights of style loss for each layer.
+    :type style_weights: str
+    :param avg_pool: If ``True``, replaces max-pooling by average-pooling.
+    :type avg_pool: bool
+    :param feature_norm: If ``True``, divides each ``style_weight`` by the 
+        square of the number of feature maps in the corresponding layer.
+    :type feature_norm: bool
+    :param weights: Weights of the VGG19 Network. Either ``'original'`` 
+        weights or ``'normalized'`` weights that are scaled such that the 
+        mean activation of each convolutional filter over images
+        and positions is equal to one.
+    :type weights: str
+    :param preserve_color: If set to ``'style'``, changes color of content 
+        image to color of style image. If set to ``'content'``, changes 
+        color of style image to color of content image. If set to 
+        ``None``, does not change any color.
+    :type preserve_color: Union[str, None]
+    :param device: Set to ``'cpu'`` to use CPU, ``'cuda'`` to use GPU  or 
+        ``'auto'`` to automatically choose device.
+    :type device: str
+    :param use_amp: If ``True``, uses automatic mixed precision for 
+        training.
+    :type use_amp: bool
+    :param adam: If ``True``, uses Adam instead of LBFGS optimizer.
+    :type adam: bool
+    :param optim_cpu: If ``True``, optimizes artwork on CPU, but can 
+        calculate gradients on GPU. This moves some data from GPU memory 
+        to working memory, but increases training time.
+    :type optim_cpu: bool
+    :param logging: Number of iterations between logs. If set to ``0``, does 
+        not log.
+    :type logging: int
+    """
 
     def __init__(self, lr=1, content_weight=1, style_weight=1e3,
                  content_weights="{'relu_4_2':1}", style_weights=("{'relu_1_1':"
@@ -13,56 +55,6 @@ class StyleTransfer(object):
                  avg_pool=False, feature_norm=True, weights='original',
                  preserve_color='style', device='auto', use_amp=False, 
                  adam=False, optim_cpu=False, logging=50):
-        """Initializes style transfer object.
-
-        :param lr: Learning rate of the optimizer., defaults to 1
-        :type lr: float, optional
-        :param content_weight: Weight for content loss., defaults to 1
-        :type content_weight: float, optional
-        :param style_weight: Weight for style loss., defaults to 1e3
-        :type style_weight: float, optional
-        :param content_weights: Weights of content loss for each layer., 
-            defaults to ``"{'relu_4_2':1}"``
-        :type content_weights: str, optional
-        :param style_weights: Weights of style loss for each layer., 
-            defaults to ``"{'relu_1_1':" "1,'relu_2_1':1,'relu_3_1':1,
-            'relu_4_1':1,'relu_5_1':1}"``
-        :type style_weights: str, optional
-        :param avg_pool: If ``True``, replaces max-pooling by average-pooling. 
-            , defaults to False
-        :type avg_pool: bool, optional
-        :param feature_norm: If ``True``, divides each ``style_weight`` by the 
-            square of the number of feature maps in the corresponding layer., 
-            defaults to True
-        :type feature_norm: bool, optional
-        :param weights: Weights of the VGG19 Network. Either ``'original'`` 
-            weights or ``'normalized'`` weights that are scaled such that the 
-            mean activation of each convolutional filter over images
-            and positions is equal to one., defaults to ``'original'``
-        :type weights: str, optional
-        :param preserve_color: If set to ``'style'``, changes color of content 
-            image to color of style image. If set to ``'content'``, changes 
-            color of style image to color of content image. If set to 
-            ``None``, does not change any color., defaults to ``'style'``
-        :type preserve_color: Union[str, None], optional
-        :param device: Set to ``'cpu'`` to use CPU , ``'cuda'`` to use GPU  or 
-            ``'auto'`` to automatically choose device., defaults to ``'auto'``
-        :type device: str, optional
-        :param use_amp: If ``True``, uses automatic mixed precision for 
-            training., defaults to False
-        :type use_amp: bool, optional
-        :param adam: If ``True``, uses Adam instead of LBFGS optimizer.
-            , defaults to False
-        :type adam: bool, optional
-        :param optim_cpu: If ``True``, optimizes artwork on CPU, but can 
-            calculate gradients on GPU. This moves some data from GPU memory 
-            to working memory, but increases training time., defaults to False
-        :type optim_cpu: bool, optional
-        :param logging: Number of iterations between logs. If set to 0, does 
-            not log., defaults to 50
-        :type logging: int, optional
-        """
-
         if device == 'auto':
             self.device = 'cuda' if torch.cuda.is_available() else 'cpu'
         else:
@@ -88,17 +80,17 @@ class StyleTransfer(object):
         :type style: PIL.Image.Image
         :param area: ``content`` and ``style`` are scaled such that their area 
             is ``area`` * ``area``. ``artwork`` has the same shape as 
-            ``content``., defaults to 512
-        :type area: int, optional
+            ``content``.
+        :type area: int
         :param init_random: If ``True``, initializes ``artwork`` with random 
-            image., defaults to False
-        :type init_random: bool, optional
+            image.
+        :type init_random: bool
         :param init_img: Image with which ``artwork`` is initialized. If set 
             to ``None``, initializes ``artwork`` either with ``content`` or 
-            randomly., defaults to None
-        :type init_img: Union[PIL.Image.Image, None], optional
-        :param iter: Number of iterations., defaults to 500
-        :type iter: int, optional
+            randomly.
+        :type init_img: Union[PIL.Image.Image, None]
+        :param iter: Number of iterations.
+        :type iter: int
         :return: ``artwork`` that matches content of ``content`` and style of 
             ``style``.
         :rtype: PIL.Image.Image
