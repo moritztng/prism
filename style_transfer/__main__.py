@@ -41,10 +41,12 @@ def main():
     parser.add_argument('--avg_pool', action='store_true',
                         help='Replace max-pooling by average-pooling.')
     parser.add_argument('--no_feature_norm', action='store_false',
-                        help=("Don't divide each style_weight by the square " "of the number of feature maps in the corresponding "
+                        help=("Don't divide each style_weight by the square "
+                        "of the number of feature maps in the corresponding "
                         "layer."))
     parser.add_argument('--preserve_color', choices=['content','style',"''"],
-                        default='style', help=("If 'style', change content " "to match style color. If 'content', vice versa. " 
+                        default='style', help=("If 'style', change content "
+                        "to match style color. If 'content', vice versa. " 
                         "If '', don't change content or style."))
     parser.add_argument('--weights', choices=['original','normalized'],
                         default='original', help=("Weights of VGG19 Network. "
@@ -56,7 +58,8 @@ def main():
     parser.add_argument('--use_adam', action='store_true',
                         help='Use Adam instead of LBFGS optimizer.')
     parser.add_argument('--optim_cpu', action='store_true',
-                        help=('Optimize artwork on CPU to move some data from' ' GPU memory to working memory.'))
+                        help=('Optimize artwork on CPU to move some data from'
+                        ' GPU memory to working memory.'))
     parser.add_argument('--quality', metavar='<int>', default=95, type=int,
                         help=('JPEG image quality of artwork, on a scale '
                         'from 1 to 95.'))
