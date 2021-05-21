@@ -1,9 +1,8 @@
 API
 ===
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+Python Object
+-------------
 
 .. autoclass:: style_transfer.learn.StyleTransfer
    :members: __call__

@@ -10,9 +10,9 @@ class StyleTransfer(object):
     :param lr: Learning rate of the optimizer.
     :type lr: float
     :param content_weight: Weight for content loss.
-    :type content_weight: float
+    :type content_weight: int
     :param style_weight: Weight for style loss.
-    :type style_weight: float
+    :type style_weight: int
     :param content_weights: Weights of content loss for each layer.
     :type content_weights: str
     :param style_weights: Weights of style loss for each layer.

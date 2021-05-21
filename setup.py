@@ -7,7 +7,7 @@ setuptools.setup(
     name="prism-style-transfer",
     version="0.1",
     author="Moritz Thuening",
-    author_email="hello@prism.art",
+    author_email="moritz.thuening@gmail.com",
     description=("High Resolution Style Transfer in PyTorch"
                  " with Color Control and Mixed Precision"),
     long_description=long_description,
@@ -23,8 +23,8 @@ setuptools.setup(
     install_requires=[
         'torch>=1.7.0',
         'torchvision>=0.8.1',
-        'tensorboard==2.3.0',
-        'Pillow==7.2.0'
+        'tensorboard>=2.3.0',
+        'Pillow>=7.2.0'
     ],
     entry_points={
         "console_scripts": [
