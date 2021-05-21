@@ -32,12 +32,14 @@ def main():
     parser.add_argument('--style_weight', metavar='<int>', default=1000,
                         type=int, help='Weight for style loss.')
     parser.add_argument('--content_weights', metavar='<str>',
-                        default="\"{'relu_4_2':1}\"",
-                        help='Weights of content loss for each layer.')
+                        default="{'relu_4_2':1}",
+                        help=('Weights of content loss for each layer. '
+                        'Put the dictionary inside quotation marks.'))
     parser.add_argument('--style_weights', metavar='<str>',
-                        default=("\"{'relu_1_1':1,'relu_2_1':1,"
-                        "'relu_3_1':1,'relu_4_1':1,'relu_5_1':1}\""),
-                        help='Weights of style loss for each layer.')
+                        default=("{'relu_1_1':1,'relu_2_1':1,"
+                        "'relu_3_1':1,'relu_4_1':1,'relu_5_1':1}"),
+                        help=('Weights of style loss for each layer. '
+                        'Put the dictionary inside quotation marks.'))
     parser.add_argument('--avg_pool', action='store_true',
                         help='Replace max-pooling by average-pooling.')
     parser.add_argument('--no_feature_norm', action='store_false',
