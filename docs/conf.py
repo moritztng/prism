@@ -4,7 +4,7 @@ author = 'Moritz Thuening'
 
 release = '0.1'
 
-extensions = ['sphinx.ext.autodoc']
+extensions = ['sphinx.ext.autodoc', 'sphinxcontrib.programoutput']
 templates_path = []
 exclude_patterns = []
 
