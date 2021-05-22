@@ -5,6 +5,7 @@ pip install git+https://github.com/moritztng/prism.git
 
 ## Quickstart
 [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1zPlJUYNkmEllnUaZw20GFoYoDawIEtC5?usp=sharing)
+[![Read the Docs](https://img.shields.io/badge/Read-Docs-blue?logo=read-the-docs&logoColor=white)](https://prism-style-transfer.readthedocs.io/en/latest/)
 #### Minimal Example
 ```bash
 style-transfer content.jpg style.jpg
