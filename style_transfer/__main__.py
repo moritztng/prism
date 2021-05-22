@@ -46,10 +46,10 @@ def main():
                         help=("Don't divide each style_weight by the square "
                         "of the number of feature maps in the corresponding "
                         "layer."))
-    parser.add_argument('--preserve_color', choices=['content','style',"''"],
+    parser.add_argument('--preserve_color', choices=['content','style','none'],
                         default='style', help=("If 'style', change content "
                         "to match style color. If 'content', vice versa. " 
-                        "If '', don't change content or style."))
+                        "If 'none', don't change content or style."))
     parser.add_argument('--weights', choices=['original','normalized'],
                         default='original', help=("Weights of VGG19 Network. "
                         "Either 'original' or 'normalized' weights."))
@@ -85,7 +85,8 @@ def main():
                                    avg_pool=args.avg_pool,
                                    feature_norm=args.no_feature_norm,
                                    weights=args.weights,
-                                   preserve_color=args.preserve_color,
+                                   preserve_color=
+                                   args.preserve_color.replace('none',''),
                                    device=args.device,
                                    use_amp=args.use_amp,
                                    adam=args.use_adam,
