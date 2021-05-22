@@ -14,6 +14,11 @@ style-transfer content.jpg style.jpg
 ```bash
 style-transfer content.jpg style.jpg --artwork artwork.png --style_weight 1000 --lr 1 --iter 500
 ```
+<div>
+  <img src='images/content.jpg' alt='Content' height='330px'>
+  <img src='images/style.jpg' alt='Style' height='330px'><br>
+  <img src='images/artwork.jpg' alt='Artwork' width='500px'>
+</div>
 
 ## Features
 #### High Resolution
