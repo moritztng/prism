@@ -5,3 +5,4 @@ _build/
 *.png
 !images/content.jpg
 !images/style.jpg
+!images/artwork.jpg
