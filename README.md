@@ -48,6 +48,9 @@ artwork = style_transfer(Image.open('content.jpg'), Image.open('style.jpg'))
 artwork.save('artwork.png')
 ```
 
+## Shop
+Buy an artwork on [prism.art](https://prism.art).
+
 ## References
 * [A Neural Algorithm of Artistic Style](https://arxiv.org/pdf/1508.06576.pdf)
 * [Image Style Transfer using Convolutional Neural Networks](https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Gatys_Image_Style_Transfer_CVPR_2016_paper.pdf)
