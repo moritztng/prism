@@ -47,3 +47,14 @@ style_transfer = StyleTransfer()
 artwork = style_transfer(Image.open('content.jpg'), Image.open('style.jpg'))
 artwork.save('artwork.png')
 ```
+
+## References
+* [A Neural Algorithm of Artistic Style](https://arxiv.org/pdf/1508.06576.pdf)
+* [Image Style Transfer using Convolutional Neural Networks](https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Gatys_Image_Style_Transfer_CVPR_2016_paper.pdf)
+* [Preserving Color in Neural Artistic Style Transfer](https://arxiv.org/pdf/1606.05897.pdf)
+* [Controlling Perceptual Factors in Neural Style Transfer](https://arxiv.org/pdf/1611.07865.pdf)
+* [Supplementary Material: Controlling Perceptual Factors in Neural Style Transfer](http://bethgelab.org/media/uploads/stylecontrol/supplement/)
+* [Mixed Precision Training](https://arxiv.org/pdf/1710.03740.pdf)
+* [PyTorch Implementation Style Transfer](https://github.com/leongatys/PytorchNeuralStyleTransfer)
+* [PyTorch Tutorial Style Transfer](https://pytorch.org/tutorials/advanced/neural_style_tutorial.html)
+* [Palette Knife Painting Sophia by Briahna Wenke](https://www.artbybri.com/2018?pgid=kma1d0tc-db6f04f5-e3a6-4d43-9901-06d9212570ff)
