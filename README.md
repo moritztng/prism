@@ -49,7 +49,9 @@ artwork.save('artwork.png')
 ```
 
 ## Shop
-Buy an artwork on [prism.art](https://prism.art).
+The shop was based on this implementation and customers ordered canvas prints there.
+
+https://user-images.githubusercontent.com/19519902/182423297-f9fa1e12-691a-43f3-ab5a-6f51c24161af.mp4
 
 ## References
 * [A Neural Algorithm of Artistic Style](https://arxiv.org/pdf/1508.06576.pdf)
