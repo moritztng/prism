@@ -53,6 +53,12 @@ The shop was based on this implementation and customers ordered canvas prints th
 
 https://user-images.githubusercontent.com/19519902/182423297-f9fa1e12-691a-43f3-ab5a-6f51c24161af.mp4
 
+### Canvas Prints
+<div>
+  <img src='https://user-images.githubusercontent.com/19519902/182806237-7b45260b-670a-48a4-8fe4-7338b647f785.jpg' alt='Moritz' height='512px'>
+  <img src='https://user-images.githubusercontent.com/19519902/182806206-b0710599-951f-4fda-8b8d-fa477197f77d.jpg' alt='Max' height='512px'>
+</div>
+
 ## References
 * [A Neural Algorithm of Artistic Style](https://arxiv.org/pdf/1508.06576.pdf)
 * [Image Style Transfer using Convolutional Neural Networks](https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Gatys_Image_Style_Transfer_CVPR_2016_paper.pdf)
