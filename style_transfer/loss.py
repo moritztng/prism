@@ -84,7 +84,7 @@ class VGG19Loss(nn.Module):
     def _build_vgg_loss(self, avg_pool, feature_norm, weights, device):
         self.content_losses, self.style_losses = {}, {}
         self.vgg_loss = nn.Sequential()
-        vgg = models.vgg19(pretrained=False).features
+        vgg = models.vgg19().features
         if weights in ('original', 'normalized'):
             state_dict = load_state_dict_from_url('https://storage.googleapis'
                          f'.com/prism-weights/vgg19-{weights}.pth')
