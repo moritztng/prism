@@ -16,10 +16,12 @@ def match_color(content, style, eps=1e-5):
     eps = eps * torch.eye(3, device=content.device)
     cov_content = dif_content @ dif_content.t() / content_pixels.size(1) + eps
     cov_style = dif_style @ dif_style.t() / style_pixels.size(1) + eps
-    eval_content, evec_content = cov_content.eig(True)
-    eval_content = eval_content[:, 0].diag()
-    eval_style, evec_style = cov_style.eig(True)
-    eval_style = eval_style[:, 0].diag()
+    eval_content, evec_content = torch.linalg.eig(cov_content)
+    eval_content = eval_content.real.diag()
+    evec_content = evec_content.real
+    eval_style, evec_style = torch.linalg.eig(cov_style)
+    eval_style = eval_style.real.diag()
+    evec_style = evec_style.real
     cov_content_sqrt = evec_content @ eval_content.sqrt() @ evec_content.t()
     cov_style_sqrt = evec_style @ eval_style.sqrt() @ evec_style.t()
     weights = cov_style_sqrt @ cov_content_sqrt.inverse()
